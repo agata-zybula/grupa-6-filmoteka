@@ -1,3 +1,5 @@
+@use './src/sass/partials/mixins' as *;
+
 @import './src/sass/partials/cards';
 @import './src/sass/partials/globals';
 @import './src/sass/partials/fonts';
