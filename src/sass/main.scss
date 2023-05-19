@@ -1,8 +1,11 @@
-/*
- * Główny plik dla stylów.
- * Wszystkie partials podłączamy tutaj.
- */
 @import './partials/cards';
-@import './partials/button';
 @import './partials/globals';
-@import './partials/typography';
+@import './src/sass/basic/basic-styles';
+@import './src/sass/basic/fonts';
+@import './src/sass/partials/header-home';
+@import './src/sass/partials/header-my-library';
+@import './src/sass/partials/main-cards';
+@import './src/sass/partials/main-cards-library';
+@import './src/sass/partials/footer';
+@import './src/sass/partials/modal';
+
