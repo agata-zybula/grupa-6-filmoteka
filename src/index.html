@@ -12,10 +12,19 @@
     />
   </head>
   <body>
-    <!-- W taki sposbu dodajemy fragmenty w główny HTML-plik strony. -->
-    <include src="./partials/example.html"></include>
+    <include src="./html/header-home.html"></include>
+    <include src="./html/header-my-library.html"></include>
+    <include src="./html/main-cards.html"></include>
+    <include src="./html/main-cards-library.html"></include>
+    <include src="./html/footer.html"></include>
+    <include src="./html/modal.html"></include>
 
-    <!-- Skrypt jest na samym dole kodu. On juz ma w sobie podłączony SAAS plik. -->
     <script src="./index.js" type="module"></script>
+    <script src="./js/header-home.js" type="module"></script>
+    <script src="./js/header-my-library.js" type="module"></script>
+    <script src="./js/main-cards.js" type="module"></script>
+    <script src="./js/main-cards-library.js" type="module"></script>
+    <script src="./js/footer.js" type="module"></script>
+    <script src="./js/modal.js" type="module"></script>
   </body>
 </html>
