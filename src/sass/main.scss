@@ -1,9 +1,10 @@
-@import './partials/cards';
-@import './partials/globals';
-@import './src/sass/basic/basic-styles';
-@import './src/sass/basic/fonts';
+@import './src/sass/partials/cards';
+@import './src/sass/partials/globals';
+@import './src/sass/partials/fonts';
 @import './src/sass/partials/header-home';
 @import './src/sass/partials/header-my-library';
 @import './src/sass/partials/cards';
 @import './src/sass/partials/footer';
 @import './src/sass/partials/modal';
+@import './src/sass/partials/mixins';
+@import './src/sass/partials/colors';
