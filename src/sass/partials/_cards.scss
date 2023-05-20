@@ -1,15 +1,33 @@
 @import './colors.scss';
 
-// write your code below
-
 .cards-wrapper {
-  padding: 20px 20px 0px 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  @include tablet {
+    padding: 60px 32px;
+    gap: 32px;
+  }
+  @include desktop {
+    gap: 15px;
+  }
 }
 
 .card {
   padding-bottom: 20px;
+  @include tablet {
+    padding: 0px;
+  }
   &__poster {
     width: 280px;
+    @include tablet {
+      width: 336px;
+    }
+    @include desktop {
+      width: 395px;
+    }
   }
   &__info {
     display: flex;
