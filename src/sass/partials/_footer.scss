@@ -1,3 +1,7 @@
+@import './colors.scss';
+
+// write your code below
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -29,7 +33,7 @@
     margin: 0 10px;
   }
   &__font {
-    font-family: roboto;
+    font-family: Roboto;
     color: #545454;
     font-size: 16px;
     font-weight: 400;
