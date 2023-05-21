@@ -41,19 +41,19 @@
     font-size: 12px;
     line-height: 1.33;
     text-transform: uppercase;
-    color: #000000;
+    color: $black;
   }
   &__movie-genre {
     display: inline;
-    color: #ff6b08;
-    font-weight: 500;
+    color: $cardSignSecondAndButtons;
+    font-weight: 400;
     font-size: 12px;
     line-height: 1.33;
   }
   &__movie-release {
     display: inline;
-    color: #ff6b08;
-    font-weight: 500;
+    color: $cardSignSecondAndButtons;
+    font-weight: 400;
     font-size: 12px;
     line-height: 1.33;
   }
@@ -65,14 +65,13 @@
     align-items: center;
     text-align: center;
     padding: 1px 6px;
-    background: #ff6b01;
+    background: $cardSignSecondAndButtons;
     border-radius: 5px;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 14.06px;
-
     text-transform: uppercase;
-    color: #ffffff;
+    color: $footerBackground;
   }
 }
