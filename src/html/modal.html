@@ -1,11 +1,12 @@
-<div class="modal is-hidden">
+<div class="modal is-hidden" data-modal>
     <div class="modal__window">
-        <button class="modal__close-button"><svg class="modal__close-button--icon" width="30" height="30">
+        <button class="modal__close-button" data-modal-close><svg class="modal__close-button--icon" width="30"
+                height="30">
                 <use href="./images/close-button-modal.svg#icon-close"></use>
             </svg></button>
         <div class="modal__poster"></div>
         <div class="modal__info">
-            <h2 class="modal__title uppercase">Title</h2>
+            <h2 class="modal__title uppercase" id="queryTitle">Title</h2>
             <div class="modal__details">
                 <ul class="modal__details-categories">
                     <li>Vote /Votes</li>
@@ -14,10 +15,10 @@
                     <li>Genre</li>
                 </ul>
                 <ul class="modal__details-values">
-                    <li><span class="modal__details-values--buttonwannabe">7.3</span> / 1260</li>
-                    <li>100.2</li>
-                    <li class="uppercase">Title</li>
-                    <li>Western</li>
+                    <li id="queryRating"><span class="modal__details-values--buttonwannabe">7.3</span> / 1260</li>
+                    <li id="queryPopularity">100.2</li>
+                    <li class="uppercase" id="queryOriginalTitle">Title</li>
+                    <li id="queryGenre">Western</li>
                 </ul>
             </div>
             <div class="modal__summary-box">
@@ -38,4 +39,5 @@
             </div>
         </div>
     </div>
+    <script src="./js/modal.js"></script>
 </div>
