@@ -1,0 +1,158 @@
+@import './colors.scss';
+
+// write your code below
+
+.header-container {
+  padding: 40px 20px 0;
+  background-image: url(../images/top-banner-320-x1.png);
+  background-image: url(../images/top-banner-320-x2.png);
+  background-size: cover;
+
+  @include tablet {
+    padding: 40px 33px 0 31px;
+    background-image: url(../images/top-banner-768-x1.png);
+    background-image: url(../images/top-banner-768-x2.png);
+  }
+  @include desktop {
+    padding: 40px 32px 0;
+    background-image: url(../images/top-banner-1280-x1.png);
+    background-image: url(../images/top-banner-1280-x2.png);
+  }
+}
+
+.navigation {
+  display: flex;
+  gap: 114px;
+  justify-content: space-between;
+
+  @include tablet {
+    gap: 387px;
+  }
+}
+
+.logo {
+  display: none;
+
+  @include tablet {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: $white;
+    display: inline;
+    margin-left: 10px;
+  }
+  @include desktop {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: $white;
+    display: inline;
+    margin-left: 10px;
+  }
+}
+
+.navigation__list {
+  display: flex;
+  text-transform: uppercase;
+  gap: 40px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: $white;
+  align-items: center;
+  position: relative;
+}
+
+.navigation__list-item--is-active::after {
+  content: '';
+  width: 34px;
+  background-color: $underscoreHeader;
+  height: 3px;
+  position: absolute;
+  left: 0;
+  top: 22px;
+
+  @include tablet {
+    top: 25px;
+  }
+}
+
+.navigation__list-item--not-active:hover::after,
+.navigation__list-item--not-active:focus::after {
+  content: '';
+  width: 65px;
+  background-color: $underscoreHeader;
+  height: 3px;
+  position: absolute;
+  right: 0;
+  top: 22px;
+
+  @include tablet {
+    top: 25px;
+  }
+}
+
+.header-search-bar {
+  margin: 57px auto 0;
+  position: relative;
+  max-width: 336px;
+
+  @include tablet {
+    margin: 40px auto 0;
+    max-width: 394px;
+  }
+  @include desktop {
+    margin: 41px auto 0;
+  }
+}
+
+.header-search-bar::after {
+  content: '';
+  width: 100%;
+  background-color: $white;
+  height: 0.06rem;
+  position: absolute;
+  top: 22px;
+}
+
+.header-search-bar--input {
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+.header-search-bar--button {
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 4px;
+  right: 0;
+}
+
+.header-search-bar--button:hover {
+  cursor: pointer;
+}
+
+.header-search-bar--warning {
+  color: $underscoreHeader;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 16px auto 0;
+  padding-bottom: 44px;
+  text-align: center;
+
+  @include tablet {
+    margin: 20px auto 0;
+  }
+  @include desktop {
+    margin: 20px auto 0;
+  }
+}
+
+input::placeholder {
+  color: $white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
