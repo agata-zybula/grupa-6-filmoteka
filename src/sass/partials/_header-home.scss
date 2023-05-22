@@ -104,49 +104,49 @@
   @include desktop {
     margin: 41px auto 0;
   }
-}
 
-.header-search-bar::after {
-  content: '';
-  width: 100%;
-  background-color: $white;
-  height: 0.06rem;
-  position: absolute;
-  top: 22px;
-}
-
-.header-search-bar--input {
-  border: none;
-  background: transparent;
-  width: 100%;
-}
-
-.header-search-bar--button {
-  border: none;
-  background: transparent;
-  position: absolute;
-  top: 4px;
-  right: 0;
-}
-
-.header-search-bar--button:hover {
-  cursor: pointer;
-}
-
-.header-search-bar--warning {
-  color: $underscoreHeader;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  margin: 16px auto 0;
-  padding-bottom: 44px;
-  text-align: center;
-
-  @include tablet {
-    margin: 20px auto 0;
+  &::after {
+    content: '';
+    width: 100%;
+    background-color: $white;
+    height: 0.06rem;
+    position: absolute;
+    top: 22px;
   }
-  @include desktop {
-    margin: 20px auto 0;
+
+  &__input {
+    border: none;
+    background: transparent;
+    width: 100%;
+  }
+
+  &__button {
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 4px;
+    right: 0;
+  }
+
+  &__button:hover {
+    cursor: pointer;
+  }
+
+  &__warning {
+    color: $underscoreHeader;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 16px auto 0;
+    padding-bottom: 44px;
+    text-align: center;
+
+    @include tablet {
+      margin: 20px auto 0;
+    }
+    @include desktop {
+      margin: 20px auto 0;
+    }
   }
 }
 
