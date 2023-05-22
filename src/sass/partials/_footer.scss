@@ -1,5 +1,7 @@
 @import './colors.scss';
 
+// write your code below
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -7,12 +9,13 @@
   background-color: #f7f7f7;
   height: 100px;
   padding-top: 28px;
-  @include tablet {
+  @media screen and (min-width: #{$tablet}) {
     flex-direction: row;
     justify-content: center;
     padding-top: 0;
     height: 79px;
   }
+
   &__first-line {
     padding-right: 4px;
   }
@@ -20,7 +23,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    @include tablet {
+    @media screen and (min-width: #{$tablet}) {
       margin-top: 0;
     }
   }
