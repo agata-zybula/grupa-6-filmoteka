@@ -1,9 +1,7 @@
 @import './colors.scss';
+@import './mixins.scss';
 
 // write your code below
-
-$colorSecondaryText: #8C8C8C;
-$colorBackdrop: #00000040;
 
 ul { 
     list-style: none;
@@ -23,15 +21,17 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $colorBackdrop;
+    background-color: $backdrop;
     z-index: 1;
+    transition: $transitionKit;
 
     &__window {
         position: relative;
-        max-width: 280px;
-        max-height: 940px;
+        width: 280px;
+        height: 940px;
         font-size: 12px;
-        font-weight: 500;
+        // font-weight: 500;
+        font-weight: 400;
         line-height: 1.3;
         background-color: $white;
         display: flex;
@@ -42,15 +42,15 @@ button {
 
         @media screen and (min-width: 768px) {
             flex-direction: row;
-            max-width: 704px;
-            max-height: 552px;
+            width: 704px;
+            height: 552px;
             padding: 40px 72px 40px 36px;
             gap: 68px;
         }
 
         @media screen and (min-width: 1280px) {
-            max-width: 806px;
-            max-height: 558px;
+            width: 806px;
+            height: 558px;
             padding: 40px 12px;
             gap: 16px;
         }
@@ -100,7 +100,11 @@ button {
         gap: 20px;
 
         @media screen and (min-width: 768px) {
-            max-width: 264px;
+            width: 264px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            width: 391px;
         }
 
     }
@@ -113,7 +117,7 @@ button {
         display: flex;
         flex-direction: column;
         margin-right: 40px;
-        color: $colorSecondaryText;
+        color: $modalText;
         gap: 8px;
     }
     
@@ -137,12 +141,17 @@ button {
 
     &__button-box {
         display: flex;
-        justify-content: center;
+        justify-content: left;
         gap: 20px;
 
         @media screen and (min-width: 768px) {
             gap: 15px;
-            // margin-top: 35px;
+            margin-top: 5px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            margin-left: 8px;
+            margin-top: 0;
         }
     }
 
@@ -152,8 +161,9 @@ button {
         border: 1px solid $black;
         width: 110px;
         height: 44px;
-        padding: 0 13px;
+        // padding: 6px 13px;
         cursor: pointer;
+        transition: $transitionKit;
 
         &:hover, &:focus {
             border: none;
@@ -164,8 +174,6 @@ button {
         @media screen and (min-width: 768px) {
             width: 125px;
             height: 44px;
-            padding: 0 9px;
-
         }
     }
 }
@@ -177,6 +185,14 @@ button {
 .is-hidden {
     opacity: 0;
     visibility: hidden;
-    // transition: $transitionKit;
+    transition: $transitionKit;
     pointer-events: none;
+}
+
+.add-padding {
+    padding: 6px 13px;
+
+    @media screen and (min-width: 768px) {
+        padding: 0;
+    }
 }
