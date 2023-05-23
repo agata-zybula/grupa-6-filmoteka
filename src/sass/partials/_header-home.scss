@@ -4,24 +4,22 @@
 
 .header-container {
   padding: 40px 20px 0;
-  background-image: url(../images/top-banner-320-x1.png);
   background-image: url(../images/top-banner-320-x2.png);
   background-size: cover;
 
   @include tablet {
     padding: 40px 33px 0 31px;
-    background-image: url(../images/top-banner-768-x1.png);
     background-image: url(../images/top-banner-768-x2.png);
   }
   @include desktop {
     padding: 40px 32px 0;
-    background-image: url(../images/top-banner-1280-x1.png);
     background-image: url(../images/top-banner-1280-x2.png);
   }
 }
 
 .navigation {
   display: flex;
+  margin: 0 auto;
   gap: 114px;
   justify-content: space-between;
 
@@ -112,6 +110,7 @@
     height: 0.06rem;
     position: absolute;
     top: 22px;
+    left: 0px;
   }
 
   &__input {
