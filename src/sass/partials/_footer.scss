@@ -6,16 +6,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f7f7f7;
+  background-color: $footerBackground;
   height: 100px;
   padding-top: 28px;
-  @media screen and (min-width: #{$tablet}) {
+  @include tablet {
     flex-direction: row;
     justify-content: center;
     padding-top: 0;
     height: 79px;
   }
-
   &__first-line {
     padding-right: 4px;
   }
@@ -23,7 +22,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    @media screen and (min-width: #{$tablet}) {
+    @include tablet {
       margin-top: 0;
     }
   }
@@ -34,7 +33,7 @@
   }
   &__font {
     font-family: Roboto;
-    color: #545454;
+    color: $textFooter;
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
