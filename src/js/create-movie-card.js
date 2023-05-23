@@ -8,6 +8,7 @@ export const createMovieCard = movies => {
         <div class="card__movie-genre">${movie.id}</div>
         <div class="card__movie-release">${movie.release_date}</div>
       </div>
+      <div class="card__movie-rating">${movie.vote_average}</div>
     </div>
   </div>`;
     })
