@@ -1,3 +1,2 @@
 import './sass/main.scss';
-
-import { toggleModal } from "./js/modal";
+import './js/create-movie-card';
