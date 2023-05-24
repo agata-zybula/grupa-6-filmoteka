@@ -7,36 +7,41 @@ export function localStorageHandler() {
     
     let moviesWatched = [];
     let moviesQueued = [];
-    
-    if (localStorage.getItem(STORAGE_WATCHED) != null) {
-        moviesWatched = JSON.parse(localStorage.getItem(STORAGE_WATCHED));
-    }
-    
-    if (localStorage.getItem(STORAGE_QUEUED) != null) {
-        moviesQueued = JSON.parse(localStorage.getItem(STORAGE_QUEUED));
-    }
-    
-    function addtoWatched() {
-        const movieId = document.querySelector(".modal").getAttribute("data-movie-id");
-        const currentMovie = "aaaa";
+
+    function addToWatched() {
         
-        if (moviesWatched.every(element => element.id !== Number(movieId))) {
-            moviesWatched.push(currentMovie);
+        const titleEl = document.querySelector("h2.modal__title");
+        const movieTitle = titleEl.innerHTML
+
+        const existingEntries = JSON.parse(localStorage.getItem(STORAGE_WATCHED) || '[]');
+        
+        if (!existingEntries.includes(movieTitle)) {
+            existingEntries.push(movieTitle);
+            
+            localStorage.setItem(STORAGE_WATCHED, JSON.stringify(existingEntries));
+        } else {
+            console.log(movieTitle + ' already exists')
         }
-        localStorage.setItem(STORAGE_WATCHED, JSON.stringify(moviesWatched));
     }
-    
+
     function addToQueued() {
-        const movieId = document.querySelector(".modal").getAttribute("data-movie-id");
-        const currentMovie = "sdsdsada";
         
-        if (moviesQueued.every(element => element.id !== Number(movieId))) {
-            moviesQueued.push(currentMovie);
+        const titleEl = document.querySelector("h2.modal__title");
+        const movieTitle = titleEl.innerHTML
+
+        const existingEntries = JSON.parse(localStorage.getItem(STORAGE_QUEUED) || '[]');
+        
+        if (!existingEntries.includes(movieTitle)) {
+            existingEntries.push(movieTitle);
+            
+            localStorage.setItem(STORAGE_QUEUED, JSON.stringify(existingEntries));
+        } else {
+            console.log(movieTitle + ' already exists')
         }
-        
-        localStorage.setItem(STORAGE_QUEUED, JSON.stringify(moviesQueued));
     }
     
-    addToWatchedButton.addEventListener("click", addtoWatched);
+    addToWatchedButton.addEventListener("click", addToWatched);
     addToQueueButton.addEventListener("click", addToQueued);
 }
+
+localStorageHandler();
