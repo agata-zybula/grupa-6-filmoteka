@@ -34,7 +34,7 @@ const getMovies = () => {
 };
 
 
-//  funkcja do pobierania danych filmu i tworzenia znaczników HTML dla galerii
+//  funkcja do pobierania danych filmu i tworzenia znaczników HTML
 const createGallery = async () => {
   const movies = await getMovies();
   const genres = await getGenres();
