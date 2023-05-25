@@ -17,6 +17,7 @@
   &__other-page {
     background: none;
     border: none;
+    cursor: pointer;
   }
   &__current-page {
     background-color: $cardSignSecondAndButtons;
@@ -25,14 +26,28 @@
     width: 40px;
     height: 40px;
     border-radius: 5px;
+    cursor: pointer;
   }
 }
-
+#arrow-left,
+#arrow-right {
+  cursor: pointer;
+}
 #first-page,
 #last-page,
-#dots {
+#dots,
+#arrow-left,
+#arrow-right {
   display: none;
   @include tablet {
     display: flex;
+  }
+}
+
+#dots {
+  @include tablet {
+    display: flex;
+    align-items: flex-start;
+    cursor: auto;
   }
 }
