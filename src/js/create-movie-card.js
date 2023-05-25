@@ -8,7 +8,7 @@ export const createMovieCard = movies => {
       <div class="card__quick-info">
         <div class="card__movie-title">${movie.title}</div>
         <div class="card__movie-genre">${movie.id}</div>
-        <div class="card__movie-release">${movie.release_date.slice(0, 4)}</div>
+        <div class="card__movie-release">${movie.release_date}</div>
       </div>
       <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
     </div>
