@@ -1,59 +1,57 @@
+
 import { createMovieCard } from './create-movie-card';
 
-
-// funkcja do pobrania listy gatunków filmowych za pomocą interfejsu API The Movie Database (TMDb).
-const getGenres = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`
-  )
-    .then((response) => response.json())
-    .catch((error) => console.log(error.message));
+const getGenres = async () => {
+ try {
+ const fetchGenres = await fetch(
+ `https://api.themoviedb.org/3/genre/movie/list?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`
+ );
+ const genres = await fetchGenres.json();
+ return genres;
+ } catch (error) {
+ console.log(error.message);
+ }
 };
 
-const galleryEl = document.querySelector('.cards-wrapper');
+ const galleryEl = document.querySelector('.cards-wrapper');
 
-
-// funkcja do pobierania szczegółów filmu za pomocą interfejsu API TMDb.
-const getMovieDetails = (details) => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${details}?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`
-  )
-    .then((response) => response.json())
-    .catch((error) => console.log(error.message));
-};
-
-
-// pobiera listę popularnych filmów
-const getMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/trending/all/day?api_key=fe36e1a920a96782eff1e1dab760f0ae&page=1`
-  )
-    .then((response) => response.json())
-    .then((data) => data.results)
-    .catch((error) => console.log(error.message));
-};
-
-
-//  funkcja do pobierania danych filmu i tworzenia znaczników HTML
-const createGallery = async () => {
+ const getMovies = async () => {
+ try {
+ const fetchMovies = await fetch(
+ `https://api.themoviedb.org/3/trending/all/day?api_key=fe36e1a920a96782eff1e1dab760f0ae&page=1`
+ );
+ const movies = await fetchMovies.json();
+ return movies;
+ } catch (error) {
+ console.log(error.message);
+ }
+ };
+ const createGallery = async () => {
   const movies = await getMovies();
   const genres = await getGenres();
-  const movieDetailsPromises = movies.map((movie) =>
-    getMovieDetails(movie.id)
-  );
-  Promise.all(movieDetailsPromises)
-    .then((movieDetails) => {
-      const moviesWithGenresAndYear = movieDetails.map((movieDetail) => ({
-        ...movieDetail,
-        genre_names: movieDetail.genre_ids.map(
-          (genreId) =>
-            genres.genres.find((genre) => genre.id === genreId).name
-        ),
-        year: new Date(movieDetail.release_date).getFullYear(),
-      }));
-      galleryEl.innerHTML = createMovieCard(moviesWithGenresAndYear);
-    })
-    .catch((error) => console.log(error.message));
-};
+ galleryEl.innerHTML = await createMovieCard(movies);
+ }
 
-createGallery();
+ createGallery();
+ 
+
+
+
+ 
+// const API_KEY = 'fe36e1a920a96782eff1e1dab760f0ae';
+//  async function fetchGenres() {
+//  console.log('fetchGenres started');
+//  const searchParams = new URLSearchParams({
+//  api_key: API_KEY
+//  });
+ 
+//  const url = `https://api.themoviedb.org/3/genre/movie/list?${searchParams}`;
+//  console.log('fetchGenres url:', url);
+ 
+//  const response = await fetch(url);
+//  console.log('fetchGenres response:', response);
+//  const genres = await response.json();
+//  console.log('fetchGenres genres:', genres);
+ 
+//  return genres;
+//  }
