@@ -1,5 +1,7 @@
 export function renderModalMarkup() {
-    const modalMarkup = `<img class="modal__poster" src="${movie.poster_path}" alt="Poster of ${movie.title} movie" />
+    const modalMarkup = `<img class="modal__poster" src="https://image.tmdb.org/t/p/w220_and_h330_face${
+        movie.poster_path
+      }" alt="Poster of ${movie.title} movie" />
         <div class="modal__info">
             <h2 class="modal__title uppercase" id="queryTitle">${movie.title}</h2>
             <div class="modal__details">

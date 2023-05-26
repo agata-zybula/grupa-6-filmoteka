@@ -4,9 +4,9 @@
                 height="30">
                 <use href="./images/close-button-modal.svg#icon-close"></use>
             </svg></button>
-        <img class="modal__poster" src="#" alt="Poster of ${movie.title} movie" />
+        <img class="modal__poster" src="#" alt="Poster of movie" />
         <div class="modal__info">
-            <h2 class="modal__title uppercase" id="queryTitle" data-movie-id="1">${movie.title}</h2>
+            <h2 class="modal__title uppercase" id="queryTitle"></h2>
             <div class="modal__details">
                 <ul class="modal__details-categories">
                     <li>Vote / Votes</li>
@@ -15,13 +15,13 @@
                     <li>Genre</li>
                 </ul>
                 <ul class="modal__details-values">
-                    <li id="queryRating"><span class="modal__details-values--buttonwannabe">${movie.vote_average}</span>
+                    <li id="queryVoteRating"><span class="modal__details-values--buttonwannabe"></span>
                         /
-                        <span>${movie.vote_count}</span>
+                        <span id="queryVoteCount"></span>
                     </li>
-                    <li id="queryPopularity">${movie.popularity}</li>
-                    <li class="uppercase" id="queryOriginalTitle">${movie.original_title}</li>
-                    <li id="queryGenre">${movie.genres.map(genres => genres.name).join(", ")}</li>
+                    <li id="queryPopularity"></li>
+                    <li class="uppercase" id="queryOriginalTitle"></li>
+                    <li id="queryGenre"></li>
                 </ul>
             </div>
             <div class="modal__summary-box">
