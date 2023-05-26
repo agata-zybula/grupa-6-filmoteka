@@ -1,9 +1,4 @@
-// import { createMovieCard } from './create-movie-card';
-import { genreList, getGenres } from './fetch-genres';
-import axios from 'axios';
-
-const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
-const galleryEl = document.querySelector('.cards-wrapper');
+import { createMovieCard } from './create-movie-card';
 
 let currentPage = 1;
 let firstPage = 1;
@@ -22,48 +17,38 @@ const lastPageButton = document.getElementById(`last-page`);
 const dots1El = document.getElementById(`dots1`);
 const dots2El = document.getElementById(`dots2`);
 
-const getTrending = async () => {
+const getGenres = async () => {
   try {
-    const searchTrendingAPI_URL = 'https://api.themoviedb.org/3/trending/movie/day';
-    const result = await axios.get(
-      `${searchTrendingAPI_URL}?api_key=${API_key}& page=1&language=en-US`,
+    const fetchGenres = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`,
     );
-
-    const movies = result.data.results;
-    await getGenres();
-
-    return movies;
+    const genres = await fetchGenres.json();
+    return genres;
   } catch (error) {
-    console.error(error);
+    console.log(error.message);
   }
 };
 
-const createMovieCard = movies => {
-  return movies
-    .map(movie => {
-      const genreNames = movie.genre_ids
-        .slice(0, 3)
-        .map(genreId => genreList[genreId])
-        .join(', ');
-      return `<div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w220_and_h330_face${
-        movie.poster_path
-      }' alt='Poster of ${movie.title} movie'></a>
-    <div class="card__info">
-      <div class="card__quick-info">
-        <div class="card__movie-title">${movie.title}</div>
-        <div class="card__movie-genre">${genreNames}</div>
-        <div class="card__movie-release">${movie.release_date.slice(0, 4)}</div>
-      </div>
-      <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
-    </div>
-  </div>`;
-    })
-    .join('');
+const galleryEl = document.querySelector('.cards-wrapper');
+
+const getMovies = async () => {
+  try {
+    const fetchMovies = await fetch(
+      `https://api.themoviedb.org/3/trending/all/day?api_key=fe36e1a920a96782eff1e1dab760f0ae&page=${currentPage}`,
+    );
+    const movies = await fetchMovies.json();
+    return movies;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const createGallery = async () => {
+  const movies = await getMovies();
+  const genres = await getGenres();
+  galleryEl.innerHTML = await createMovieCard(movies);
 };
 
-getTrending().then(movies => {
-  galleryEl.innerHTML = createMovieCard(movies);
-});
+createGallery();
 
 // Pagination
 
