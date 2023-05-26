@@ -152,12 +152,12 @@ function getMovieData(filmId) {
 
     modal.classList.remove('is-hidden');
     posterEl.src = `https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`;
-    titleEl.innerHTML = `${movie.original_title}`;
+    titleEl.innerHTML = `${movie.title}`;
+    console.log(`${movie.title}`);
     voteRatingEl.innerHTML = `${movie.vote_average}`;
-    voteCountEl.innerHTML = `${movie.vote_count}`;
+    //oteCountEl.innerHTML = `${movie.vote_count}`;
     popularityEl.innerHTML = `${movie.popularity}`;
-    originalTitleEl.innerHTML = `${movie.original_title}`;
-    // genreEl.innerHTML = `${movie.genres}`;
+    originalTitleEl.innerHTML = `${movie.originalTitle}`;
     overviewEl.innerHTML = `${movie.overview}`;
 
     closeModal.addEventListener('click', () => {

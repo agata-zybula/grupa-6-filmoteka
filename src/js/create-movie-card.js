@@ -1,7 +1,7 @@
 export const createMovieCard = movies => {
   return movies.results
     .map(movie => {
-      return `<div id="card" class="card" ><img class="card__poster" src='https://image.tmdb.org/t/p/w220_and_h330_face${
+      return `<div  class="card" ><img class="card__poster" src='https://image.tmdb.org/t/p/w220_and_h330_face${
         movie.poster_path
       }' alt=Poster of ${movie.title} movie data-id="${movie.id}"></a>
     <div class="card__info">
