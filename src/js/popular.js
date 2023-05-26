@@ -1,57 +1,128 @@
-
 import { createMovieCard } from './create-movie-card';
 
+let moviesOnPage = 40;
+let currentPage = 1;
+
+const currentPageButton = document.getElementById(`current-page`);
+const arrowLeftButton = document.getElementById(`arrow-left`);
+const arrowRightButton = document.getElementById(`arrow-right`);
+const currentPageAddOneButton = document.getElementById(`current-page+1`);
+const currentPageAddTwoButton = document.getElementById(`current-page+2`);
+const currentPageMinusOneButton = document.getElementById(`current-page-1`);
+const currentPageMinusTwoButton = document.getElementById(`current-page-2`);
+const firstPageButton = document.getElementById(`first-page`);
+const lastPageButton = document.getElementById(`last-page`);
+const dots1El = document.getElementById(`dots1`);
+const dots2El = document.getElementById(`dots2`);
+
 const getGenres = async () => {
- try {
- const fetchGenres = await fetch(
- `https://api.themoviedb.org/3/genre/movie/list?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`
- );
- const genres = await fetchGenres.json();
- return genres;
- } catch (error) {
- console.log(error.message);
- }
+  try {
+    const fetchGenres = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=fe36e1a920a96782eff1e1dab760f0ae&language=en-US`,
+    );
+    const genres = await fetchGenres.json();
+    return genres;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
- const galleryEl = document.querySelector('.cards-wrapper');
+const galleryEl = document.querySelector('.cards-wrapper');
 
- const getMovies = async () => {
- try {
- const fetchMovies = await fetch(
- `https://api.themoviedb.org/3/trending/all/day?api_key=fe36e1a920a96782eff1e1dab760f0ae&page=1`
- );
- const movies = await fetchMovies.json();
- return movies;
- } catch (error) {
- console.log(error.message);
- }
- };
- const createGallery = async () => {
+const getMovies = async () => {
+  try {
+    const fetchMovies = await fetch(
+      `https://api.themoviedb.org/3/trending/all/day?api_key=fe36e1a920a96782eff1e1dab760f0ae&page=${currentPage}`,
+    );
+    const movies = await fetchMovies.json();
+    return movies;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const createGallery = async () => {
   const movies = await getMovies();
   const genres = await getGenres();
- galleryEl.innerHTML = await createMovieCard(movies);
- }
+  galleryEl.innerHTML = await createMovieCard(movies);
+};
 
- createGallery();
- 
+createGallery();
 
+// Pagination
 
+arrowRightButton.addEventListener('click', e => {
+  e.preventDefault();
+  console.log(`click`);
+  currentPage += 1;
+  getMovies();
+  createGallery();
+  if (currentPage <= 3) {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = ``;
+    currentPageAddTwoButton.innerHTML = ``;
+    currentPageMinusOneButton.innerHTML = ``;
+    currentPageMinusTwoButton.innerHTML = ``;
+    dots1El.innerHTML = ``;
+    dots2El.innerHTML = ``;
+  } else {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = currentPage + 1;
+    currentPageAddTwoButton.innerHTML = currentPage + 2;
+    currentPageMinusOneButton.innerHTML = currentPage - 1;
+    currentPageMinusTwoButton.innerHTML = currentPage - 2;
+    dots1El.innerHTML = `...`;
+    dots2El.innerHTML = `...`;
+    firstPageButton.innerHTML = 1;
+    lastPageButton.innerHTML = 20;
+  }
+});
 
- 
+arrowLeftButton.addEventListener('click', e => {
+  e.preventDefault();
+  console.log(`click`);
+  currentPage -= 1;
+  getMovies();
+  createGallery();
+  if (currentPage <= 3) {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = ``;
+    currentPageAddTwoButton.innerHTML = ``;
+    currentPageMinusOneButton.innerHTML = ``;
+    currentPageMinusTwoButton.innerHTML = ``;
+    dots1El.innerHTML = ``;
+    dots2El.innerHTML = ``;
+    firstPageButton.innerHTML = ``;
+    lastPageButton.innerHTML = ``;
+  } else {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = currentPage + 1;
+    currentPageAddTwoButton.innerHTML = currentPage + 2;
+    currentPageMinusOneButton.innerHTML = currentPage - 1;
+    currentPageMinusTwoButton.innerHTML = currentPage - 2;
+    dots1El.innerHTML = `...`;
+    dots2El.innerHTML = `...`;
+    firstPageButton.innerHTML = 1;
+    lastPageButton.innerHTML = 20;
+  }
+});
+
+// firstPageButton.innerHTML = 1;
+// lastPageButton.innerHTML = 20;
+
 // const API_KEY = 'fe36e1a920a96782eff1e1dab760f0ae';
 //  async function fetchGenres() {
 //  console.log('fetchGenres started');
 //  const searchParams = new URLSearchParams({
 //  api_key: API_KEY
 //  });
- 
+
 //  const url = `https://api.themoviedb.org/3/genre/movie/list?${searchParams}`;
 //  console.log('fetchGenres url:', url);
- 
+
 //  const response = await fetch(url);
 //  console.log('fetchGenres response:', response);
 //  const genres = await response.json();
 //  console.log('fetchGenres genres:', genres);
- 
+
 //  return genres;
 //  }
