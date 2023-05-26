@@ -1,7 +1,9 @@
 import { createMovieCard } from './create-movie-card';
-
-let moviesOnPage = 40;
+import { ifPagination } from './pagination';
 let currentPage = 1;
+let firstPage = 1;
+let lastPage = 20;
+let moviesOnPage = 40;
 
 const currentPageButton = document.getElementById(`current-page`);
 const arrowLeftButton = document.getElementById(`arrow-left`);
@@ -50,37 +52,74 @@ createGallery();
 
 // Pagination
 
-arrowRightButton.addEventListener('click', e => {
-  e.preventDefault();
-  console.log(`click`);
-  currentPage += 1;
-  getMovies();
-  createGallery();
-  if (currentPage <= 3) {
-    currentPageButton.innerHTML = currentPage;
-    currentPageAddOneButton.innerHTML = ``;
-    currentPageAddTwoButton.innerHTML = ``;
-    currentPageMinusOneButton.innerHTML = ``;
-    currentPageMinusTwoButton.innerHTML = ``;
-    dots1El.innerHTML = ``;
-    dots2El.innerHTML = ``;
-  } else {
-    currentPageButton.innerHTML = currentPage;
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    currentPageMinusOneButton.innerHTML = currentPage - 1;
-    currentPageMinusTwoButton.innerHTML = currentPage - 2;
-    dots1El.innerHTML = `...`;
-    dots2El.innerHTML = `...`;
-    firstPageButton.innerHTML = 1;
-    lastPageButton.innerHTML = 20;
-  }
+[document.getElementById(`current-page-1`), document.getElementById(`arrow-left`)].forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    console.log(`click`);
+    currentPage -= 1;
+    getMovies();
+    createGallery();
+    if (currentPage <= 3) {
+      currentPageButton.innerHTML = currentPage;
+      currentPageAddOneButton.innerHTML = ``;
+      currentPageAddTwoButton.innerHTML = ``;
+      currentPageMinusOneButton.innerHTML = ``;
+      currentPageMinusTwoButton.innerHTML = ``;
+      dots1El.innerHTML = ``;
+      dots2El.innerHTML = ``;
+      firstPageButton.innerHTML = ``;
+      lastPageButton.innerHTML = ``;
+    } else {
+      currentPageButton.innerHTML = currentPage;
+      currentPageAddOneButton.innerHTML = currentPage + 1;
+      currentPageAddTwoButton.innerHTML = currentPage + 2;
+      currentPageMinusOneButton.innerHTML = currentPage - 1;
+      currentPageMinusTwoButton.innerHTML = currentPage - 2;
+      dots1El.innerHTML = `...`;
+      dots2El.innerHTML = `...`;
+      firstPageButton.innerHTML = 1;
+      lastPageButton.innerHTML = 20;
+    }
+  });
 });
 
-arrowLeftButton.addEventListener('click', e => {
+[document.getElementById(`current-page+1`), document.getElementById(`arrow-right`)].forEach(
+  item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      console.log(`click`);
+      currentPage += 1;
+      getMovies();
+      createGallery();
+      if (currentPage <= 3) {
+        currentPageButton.innerHTML = currentPage;
+        currentPageAddOneButton.innerHTML = ``;
+        currentPageAddTwoButton.innerHTML = ``;
+        currentPageMinusOneButton.innerHTML = ``;
+        currentPageMinusTwoButton.innerHTML = ``;
+        dots1El.innerHTML = ``;
+        dots2El.innerHTML = ``;
+        firstPageButton.innerHTML = ``;
+        lastPageButton.innerHTML = ``;
+      } else {
+        currentPageButton.innerHTML = currentPage;
+        currentPageAddOneButton.innerHTML = currentPage + 1;
+        currentPageAddTwoButton.innerHTML = currentPage + 2;
+        currentPageMinusOneButton.innerHTML = currentPage - 1;
+        currentPageMinusTwoButton.innerHTML = currentPage - 2;
+        dots1El.innerHTML = `...`;
+        dots2El.innerHTML = `...`;
+        firstPageButton.innerHTML = 1;
+        lastPageButton.innerHTML = 20;
+      }
+    });
+  },
+);
+
+currentPageMinusTwoButton.addEventListener('click', e => {
   e.preventDefault();
   console.log(`click`);
-  currentPage -= 1;
+  currentPage -= 2;
   getMovies();
   createGallery();
   if (currentPage <= 3) {
@@ -106,8 +145,92 @@ arrowLeftButton.addEventListener('click', e => {
   }
 });
 
-// firstPageButton.innerHTML = 1;
-// lastPageButton.innerHTML = 20;
+currentPageAddTwoButton.addEventListener('click', e => {
+  e.preventDefault();
+  console.log(`click`);
+  currentPage += 2;
+  getMovies();
+  createGallery();
+  if (currentPage <= 3) {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = ``;
+    currentPageAddTwoButton.innerHTML = ``;
+    currentPageMinusOneButton.innerHTML = ``;
+    currentPageMinusTwoButton.innerHTML = ``;
+    dots1El.innerHTML = ``;
+    dots2El.innerHTML = ``;
+    firstPageButton.innerHTML = ``;
+    lastPageButton.innerHTML = ``;
+  } else {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = currentPage + 1;
+    currentPageAddTwoButton.innerHTML = currentPage + 2;
+    currentPageMinusOneButton.innerHTML = currentPage - 1;
+    currentPageMinusTwoButton.innerHTML = currentPage - 2;
+    dots1El.innerHTML = `...`;
+    dots2El.innerHTML = `...`;
+    firstPageButton.innerHTML = 1;
+    lastPageButton.innerHTML = 20;
+  }
+});
+
+firstPageButton.addEventListener('click', e => {
+  e.preventDefault();
+  console.log(`click`);
+  currentPage = firstPage;
+  getMovies();
+  createGallery();
+  if (currentPage <= 3) {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = ``;
+    currentPageAddTwoButton.innerHTML = ``;
+    currentPageMinusOneButton.innerHTML = ``;
+    currentPageMinusTwoButton.innerHTML = ``;
+    dots1El.innerHTML = ``;
+    dots2El.innerHTML = ``;
+    firstPageButton.innerHTML = ``;
+    lastPageButton.innerHTML = ``;
+  } else {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = currentPage + 1;
+    currentPageAddTwoButton.innerHTML = currentPage + 2;
+    currentPageMinusOneButton.innerHTML = currentPage - 1;
+    currentPageMinusTwoButton.innerHTML = currentPage - 2;
+    dots1El.innerHTML = `...`;
+    dots2El.innerHTML = `...`;
+    firstPageButton.innerHTML = 1;
+    lastPageButton.innerHTML = 20;
+  }
+});
+
+lastPageButton.addEventListener('click', e => {
+  e.preventDefault();
+  console.log(`click`);
+  currentPage = lastPage;
+  getMovies();
+  createGallery();
+  if (currentPage <= 3) {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = ``;
+    currentPageAddTwoButton.innerHTML = ``;
+    currentPageMinusOneButton.innerHTML = ``;
+    currentPageMinusTwoButton.innerHTML = ``;
+    dots1El.innerHTML = ``;
+    dots2El.innerHTML = ``;
+    firstPageButton.innerHTML = ``;
+    lastPageButton.innerHTML = ``;
+  } else {
+    currentPageButton.innerHTML = currentPage;
+    currentPageAddOneButton.innerHTML = currentPage + 1;
+    currentPageAddTwoButton.innerHTML = currentPage + 2;
+    currentPageMinusOneButton.innerHTML = currentPage - 1;
+    currentPageMinusTwoButton.innerHTML = currentPage - 2;
+    dots1El.innerHTML = `...`;
+    dots2El.innerHTML = `...`;
+    firstPageButton.innerHTML = 1;
+    lastPageButton.innerHTML = 20;
+  }
+});
 
 // const API_KEY = 'fe36e1a920a96782eff1e1dab760f0ae';
 //  async function fetchGenres() {
