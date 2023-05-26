@@ -1,5 +1,5 @@
 import { createMovieCard } from './create-movie-card';
-import { ifPagination } from './pagination';
+
 let currentPage = 1;
 let firstPage = 1;
 let lastPage = 20;
@@ -55,7 +55,6 @@ createGallery();
 [document.getElementById(`current-page-1`), document.getElementById(`arrow-left`)].forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
-    console.log(`click`);
     currentPage -= 1;
     getMovies();
     createGallery();
@@ -87,7 +86,7 @@ createGallery();
   item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      console.log(`click`);
+
       currentPage += 1;
       getMovies();
       createGallery();
@@ -118,7 +117,6 @@ createGallery();
 
 currentPageMinusTwoButton.addEventListener('click', e => {
   e.preventDefault();
-  console.log(`click`);
   currentPage -= 2;
   getMovies();
   createGallery();
@@ -147,7 +145,6 @@ currentPageMinusTwoButton.addEventListener('click', e => {
 
 currentPageAddTwoButton.addEventListener('click', e => {
   e.preventDefault();
-  console.log(`click`);
   currentPage += 2;
   getMovies();
   createGallery();
@@ -176,7 +173,6 @@ currentPageAddTwoButton.addEventListener('click', e => {
 
 firstPageButton.addEventListener('click', e => {
   e.preventDefault();
-  console.log(`click`);
   currentPage = firstPage;
   getMovies();
   createGallery();
@@ -205,7 +201,6 @@ firstPageButton.addEventListener('click', e => {
 
 lastPageButton.addEventListener('click', e => {
   e.preventDefault();
-  console.log(`click`);
   currentPage = lastPage;
   getMovies();
   createGallery();
