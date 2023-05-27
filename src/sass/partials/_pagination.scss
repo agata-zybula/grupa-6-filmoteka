@@ -37,6 +37,10 @@
   justify-content: center;
   align-items: center;
 }
+
+#arrow-left {
+  visibility: hidden;
+}
 #first-page,
 #last-page,
 #dots,
@@ -49,6 +53,7 @@
 }
 
 #dots {
+  cursor: auto;
   @include tablet {
     display: flex;
     align-items: flex-start;
