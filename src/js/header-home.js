@@ -1,30 +1,13 @@
 import { genreList, getGenres } from './fetch-genres';
-
 import axios from 'axios';
 
 const inputEl = document.querySelector('.header-search-bar__input');
 const searchButtonEl = document.querySelector('.header-search-bar__button');
 const warningEl = document.querySelector('.header-search-bar__warning');
-// Pagination elements
-let currentPage = 1;
-let firstPage = 1;
-let lastPage = 20;
-const moviesPerPage = 10;
-
-const currentPageButton = document.getElementById('current-page');
-const arrowLeftButton = document.getElementById('arrow-left');
-const arrowRightButton = document.getElementById('arrow-right');
-const currentPageAddOneButton = document.getElementById('current-page+1');
-const currentPageAddTwoButton = document.getElementById('current-page+2');
-const currentPageMinusOneButton = document.getElementById('current-page-1');
-const currentPageMinusTwoButton = document.getElementById('current-page-2');
-const firstPageButton = document.getElementById('first-page');
-const lastPageButton = document.getElementById('last-page');
-const dots1El = document.getElementById('dots1');
-const dots2El = document.getElementById('dots2');
 const galleryEl = document.querySelector('.cards-wrapper');
-// ------------------------------------------------------------------------------------------
+
 const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
+let page = 1;
 
 warningEl.style.visibility = 'hidden';
 
@@ -32,14 +15,10 @@ const getMoviesSearch = async () => {
   try {
     const searchMovieAPI_URL = 'https://api.themoviedb.org/3/search/movie';
     const result = await axios.get(
-      `${searchMovieAPI_URL}?api_key=${API_key}&query=${inputEl.value}&page=${currentPage}&language=en-US`,
+      `${searchMovieAPI_URL}?api_key=${API_key}&query=${inputEl.value}&page=${page}&language=en-US`,
     );
-
-    // console.log('response getMovies', result);
     const movies = result.data.results;
-    // console.log('movies', movies);
     await getGenres();
-
     return movies;
   } catch (error) {
     console.error(error);
@@ -47,8 +26,11 @@ const getMoviesSearch = async () => {
 };
 
 const createMovieCardSearch = movies => {
-  // console.log('movies', movies);
-  return movies
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(inputEl.value.toLowerCase()),
+  );
+
+  return filteredMovies
     .map(movie => {
       const genreNames = movie.genre_ids
         .slice(0, 3)
@@ -70,140 +52,46 @@ const createMovieCardSearch = movies => {
     .join('');
 };
 
+const clearGallery = () => {
+  galleryEl.innerHTML = '';
+};
+
+const searchMovies = async () => {
+  clearGallery();
+  page = 1;
+  const movies = await getMoviesSearch();
+  if (movies.length === 0) {
+    warningEl.style.visibility = 'visible';
+  } else {
+    warningEl.style.visibility = 'hidden';
+    galleryEl.innerHTML = createMovieCardSearch(movies);
+  }
+};
+
+const loadMoreMovies = () => {
+  getMoviesSearch().then(movies => {
+    page += 1;
+    galleryEl.insertAdjacentHTML('beforeend', createMovieCardSearch(movies));
+  });
+};
+
 searchButtonEl.addEventListener('click', event => {
   event.preventDefault();
-  getMoviesSearch().then(movies => {
-    // const movieData = movies;
-    // console.log('movieData', movieData);
-
-    if (movies.length === 0) {
-      galleryEl.innerHTML = '';
-      inputEl.value = '';
-      warningEl.style.visibility = 'visible';
-    } else {
-      warningEl.style.visibility = 'hidden';
-      galleryEl.innerHTML = createMovieCardSearch(movies);
-    }
-  });
+  searchMovies();
 });
 
 inputEl.addEventListener('keypress', event => {
   if (event.key === 'Enter') {
     event.preventDefault();
-    searchButtonEl.click();
+    searchMovies();
   }
 });
 
-const updatePageSearch = () => {
-  getMoviesSearch().then(movies => {
-    // const movieData = movies;
-    // console.log('movieData', movieData);
-    warningEl.style.visibility = 'hidden';
-    galleryEl.innerHTML = createMovieCardSearchSearch(movies);
-  });
-  if (currentPage === 1) {
-    currentPageButton.innerHTML = currentPage;
-    arrowLeftButton.style.visibility = 'hidden';
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    currentPageMinusOneButton.innerHTML = '';
-    currentPageMinusTwoButton.innerHTML = '';
-    dots1El.innerHTML = '';
-    dots2El.innerHTML = '...';
-    lastPageButton.innerHTML = lastPage;
-    firstPageButton.innerHTML = ``;
-  } else if (currentPage === 2) {
-    currentPageButton.innerHTML = currentPage;
-    arrowLeftButton.style.visibility = 'visible';
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    currentPageMinusOneButton.innerHTML = currentPage - 1;
-    currentPageMinusTwoButton.innerHTML = ``;
-    firstPageButton.innerHTML = ``;
-    dots1El.innerHTML = '';
-  } else if (currentPage === 3) {
-    currentPageButton.innerHTML = currentPage;
-    currentPageMinusOneButton.innerHTML = currentPage - 1;
-    currentPageMinusTwoButton.innerHTML = currentPage - 2;
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    firstPageButton.innerHTML = ``;
-    dots1El.innerHTML = '';
-  } else if (currentPage === 4) {
-    currentPageButton.innerHTML = currentPage;
-    currentPageMinusOneButton.innerHTML = currentPage - 1;
-    currentPageMinusTwoButton.innerHTML = currentPage - 2;
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    dots1El.innerHTML = firstPage;
-    firstPageButton.innerHTML = ``;
-  } else if (currentPage >= 4) {
-    currentPageButton.innerHTML = currentPage;
-    currentPageAddOneButton.innerHTML = currentPage + 1;
-    currentPageAddTwoButton.innerHTML = currentPage + 2;
-    currentPageMinusOneButton.innerHTML = currentPage - 1;
-    currentPageMinusTwoButton.innerHTML = currentPage - 2;
-    dots1El.innerHTML = '...';
-    dots2El.innerHTML = '...';
-    firstPageButton.innerHTML = firstPage;
-    lastPageButton.innerHTML = lastPage;
+const handleScroll = () => {
+  const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+  if (scrollTop + clientHeight >= scrollHeight) {
+    loadMoreMovies();
   }
 };
 
-const handlePageUpdate = increment => {
-  currentPage += increment;
-  updatePageSearch();
-};
-
-const handleFirstPage = () => {
-  currentPage = firstPage;
-  updatePageSearch();
-};
-
-const handleLastPage = () => {
-  currentPage = lastPage;
-  updatePageSearch();
-};
-
-firstPageButton.addEventListener('click', e => {
-  e.preventDefault();
-  handleFirstPage();
-});
-
-lastPageButton.addEventListener('click', e => {
-  e.preventDefault();
-  arrowLeftButton.style.visibility = 'visible';
-  handleLastPage();
-});
-
-arrowLeftButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(-1);
-});
-currentPageMinusOneButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(-1);
-});
-
-arrowRightButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(1);
-});
-currentPageAddOneButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(1);
-});
-
-currentPageMinusTwoButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(-2);
-});
-currentPageAddTwoButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(2);
-});
-
-currentPageAddTwoButton.addEventListener('click', e => {
-  e.preventDefault();
-  handlePageUpdate(2);
-});
+window.addEventListener('scroll', handleScroll);
