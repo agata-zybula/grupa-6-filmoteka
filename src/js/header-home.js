@@ -36,9 +36,9 @@ const createMovieCardSearch = movies => {
         .slice(0, 3)
         .map(genreId => genreList[genreId])
         .join(', ');
-      return `<div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w220_and_h330_face${
+      return `<div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w500${
         movie.poster_path
-      }' alt=Poster of ${movie.title} movie data-id="${movie.id}"></a>
+      }' alt='Poster of ${movie.title} movie' data-id="${movie.id}"></a>
     <div class="card__info">
       <div class="card__quick-info">
         <div class="card__movie-title">${movie.title}</div>
