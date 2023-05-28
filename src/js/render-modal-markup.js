@@ -1,5 +1,5 @@
 export function renderModalMarkup() {
-    const modalMarkup = `<img class="modal__poster" src="https://image.tmdb.org/t/p/w220_and_h330_face${
+    return `<img class="modal__poster" src="https://image.tmdb.org/t/p/w220_and_h330_face${
         movie.poster_path
       }" alt="Poster of ${movie.title} movie" />
         <div class="modal__info">
@@ -15,7 +15,7 @@ export function renderModalMarkup() {
                     <li id="queryRating"><span class="modal__details-values--buttonwannabe">${movie.vote_average}</span> / <span>${movie.vote_count}</span></li>
                     <li id="queryPopularity">${movie.popularity}</li>
                     <li class="uppercase" id="queryOriginalTitle">${movie.original_title}</li>
-                    <li id="queryGenre">${movie.genres.map(genres => genres.name).join(", ")}</li>
+                    <li id="queryGenre">}</li>
                 </ul>
             </div>
             <div class="modal__summary-box">
