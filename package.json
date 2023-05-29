@@ -2,14 +2,16 @@
   "name": "grupa-6-filmoteka",
   "version": "1.1.0",
   "description": "",
-  "homepage": "https://agata-zybula.github.io/grupa-6-filmoteka",
+  "homepage": "https://agata-zybula.github.io/grupa-6-filmoteka/",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url grupa-6-filmoteka"
+    "build": "parcel build src/*.html --public-url /grupa-6-filmoteka/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/migace/parcel-project-template-pl-main.git"
+    "url": "git+https://github.com/agata-zybula/grupa-6-filmoteka.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
@@ -20,7 +22,9 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",
     "buffer": "^5.7.1",
+    "gh-pages": "^5.0.0",
     "parcel": "^2.8.3",
+    "parcel-bundler": "^1.12.5",
     "posthtml-include": "^1.7.4"
   },
   "dependencies": {
