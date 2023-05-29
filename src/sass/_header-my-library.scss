@@ -117,25 +117,37 @@
   height: 44px;
   border: 1px solid $white;
   border-radius: 5px;
-  background: none;
-  transition: background-color border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: none;    
+  cursor: pointer;
+  transition: $transitionKit;
+
+  &:hover, &:focus, &:active { 
+    color: $white;
+    background-color: $cardSignSecondAndButtons;
+    border: none;
+  }
+
+  &--active {
+    background-color: $cardSignSecondAndButtons;
+    border: none;
+  }
 }
 
-.watched__button--active {
-  background-color: $cardSignSecondAndButtons;
-  border-color: $cardSignSecondAndButtons;
-  transition: color 250ms;
-}
+// .watched__button--active {
+//   background-color: $cardSignSecondAndButtons;
+//   border-color: $cardSignSecondAndButtons;
+//   transition: color 250ms;
+// }
 
-.header-my-library__link:hover,
-.watched__button:hover,
-.header-my-library__logo-text:hover,
-.header-my-library__link:focus,
-.header-my-library__logo-text:focus,
-.watched__button:focus {
-  color: $textFooter;
-  border-color: $textFooter;
-}
+// .header-my-library__link:hover,
+// .watched__button:hover,
+// .header-my-library__logo-text:hover,
+// .header-my-library__link:focus,
+// .header-my-library__logo-text:focus,
+// .watched__button:focus {
+//   color: $textFooter;
+//   border-color: $textFooter;
+// }
 
 // Tablet
 @include tablet {

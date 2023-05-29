@@ -1,3 +1,6 @@
+import { genreList, getGenres} from "./fetch-genres";
+import { renderWatchedMovies } from "./get-local-storage";
+
 const findMovieApi_URL = 'https://api.themoviedb.org/3/movie/';
 const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
 
@@ -71,3 +74,6 @@ export function localStorageHandler() {
 }
 
 localStorageHandler();
+
+
+
