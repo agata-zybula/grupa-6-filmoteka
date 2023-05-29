@@ -13,3 +13,19 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.gallery-button {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.load-more,
+.load-more-trending {
+  padding: 10px 18px;
+  background-color: lightgray;
+  border-radius: 5%;
+  border: none;
+  color: black;
+  cursor: pointer;
+}

@@ -4,6 +4,7 @@ import axios from 'axios';
 const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
 const galleryEl = document.querySelector('.cards-wrapper');
 const loadMoreTrendingButtonEl = document.querySelector('.load-more-trending');
+
 let page = 1;
 
 const getTrending = async () => {
@@ -12,8 +13,12 @@ const getTrending = async () => {
     const result = await axios.get(
       `${searchTrendingAPI_URL}?api_key=${API_key}&page=${page}&language=en-US`,
     );
+
     const movies = result.data.results;
+    console.log('movies', movies);
+    const loadMoreInputButtonEl = (document.querySelector('.load-more').hidden = true);
     await getGenres();
+
     return movies;
   } catch (error) {
     console.error(error);
@@ -43,24 +48,18 @@ const createMovieCard = movies => {
     .join('');
 };
 
-const loadMoreMovies = () => {
-  getTrending().then(movies => {
-    galleryEl.insertAdjacentHTML('beforeend', createMovieCard(movies));
-    page += 1;
-  });
-};
-
-const handleScroll = () => {
-  const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight) {
-    loadMoreMovies();
-  }
-};
-
-window.addEventListener('scroll', handleScroll);
-
-// Initial page load
 getTrending().then(movies => {
   galleryEl.innerHTML = createMovieCard(movies);
   page += 1;
+});
+
+const loadMorePhotos = () => {
+  getTrending().then(movies => {
+    galleryEl.insertAdjacentHTML('beforeend', createMovieCard(movies));
+  });
+};
+
+loadMoreTrendingButtonEl.addEventListener('click', event => {
+  page += 1;
+  loadMorePhotos();
 });
