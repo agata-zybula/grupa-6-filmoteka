@@ -3,15 +3,21 @@
 .cards-wrapper {
   padding: 20px;
   display: flex;
+  margin: 0px auto;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  max-width: 480px;
+
   @include tablet {
     padding: 60px 32px;
     gap: 32px;
+    max-width: 768px;
   }
   @include desktop {
     gap: 15px;
+    max-width: 1280px;
+    flex-basis: calc((100% - 60px) / 3);
   }
 }
 
@@ -22,11 +28,14 @@
   }
   &__poster {
     width: 280px;
+    height: 402px;
     @include tablet {
       width: 336px;
+      height: 455px;
     }
     @include desktop {
       width: 395px;
+      height: 574px;
     }
   }
   &__info {
