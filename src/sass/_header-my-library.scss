@@ -127,15 +127,15 @@
   transition: color 250ms;
 }
 
-.header-my-library__link:hover,
-.watched__button:hover,
-.header-my-library__logo-text:hover,
-.header-my-library__link:focus,
-.header-my-library__logo-text:focus,
-.watched__button:focus {
-  color: $textFooter;
-  border-color: $textFooter;
-}
+// .header-my-library__link:hover,
+// .watched__button:hover,
+// .header-my-library__logo-text:hover,
+// .header-my-library__link:focus,
+// .header-my-library__logo-text:focus,
+// .watched__button:focus {
+//   color: $textFooter;
+//   border-color: $textFooter;
+// }
 
 // Tablet
 @include tablet {
@@ -235,6 +235,14 @@
   .watched__button {
     width: 148px;
     height: 42px;
+    cursor: pointer;
+    transition: $transitionKit;
+
+    &:hover, &:focus { 
+      color: $white;
+      background-color: $cardSignSecondAndButtons;
+      border: none;
+    }
   }
 }
 
