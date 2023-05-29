@@ -1,6 +1,7 @@
 import { createMovieCard } from './create-movie-card';
 import { localStorageHandler } from './add-to-local-storage';
-// import { renderModalMarkup } from './render-modal-markup';
+import { renderWatchedMovies } from './get-local-storage'; 
+import { genreList, getGenres } from "./fetch-genres";
 
 // Open or close modal
 const openModal = document.querySelector('[data-modal-open]');
@@ -137,6 +138,7 @@ function getMovieData(filmId) {
     };
 
     console.log(movie);
+    console.log(movie.id)
 
     let modal = document.querySelector('.modal');
     const closeModal = document.querySelector('[data-modal-close]');
