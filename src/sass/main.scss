@@ -1,12 +1,12 @@
-@use './src/sass/partials/mixins' as *;
+@use './mixins' as *;
 
-@import './src/sass/partials/cards';
-@import './src/sass/partials/globals';
-@import './src/sass/partials/fonts';
-@import './src/sass/partials/header-home';
-@import './src/sass/partials/header-my-library';
-@import './src/sass/partials/cards';
-@import './src/sass/partials/footer';
-@import './src/sass/partials/modal';
-@import './src/sass/partials/mixins';
-@import './src/sass/partials/colors';
+@import './cards';
+@import './globals';
+@import './fonts';
+@import './header-home';
+@import './header-my-library';
+@import './cards';
+@import './footer';
+@import './modal';
+@import './mixins';
+@import './colors';
