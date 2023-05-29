@@ -21,6 +21,7 @@
     "@parcel/transformer-sass": "^2.8.3",
     "buffer": "^5.7.1",
     "parcel": "^2.8.3",
+    "parcel-bundler": "^1.12.5",
     "posthtml-include": "^1.7.4"
   },
   "dependencies": {
