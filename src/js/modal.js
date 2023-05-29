@@ -8,21 +8,26 @@ const openModalOnCard = document.querySelector('.card');
 const modalWindow = document.querySelector('.modal__window');
 const closeModal = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
+const cardEl = document.querySelectorAll(".card");
 
 function toggleModal() {
   modal.classList.toggle('is-hidden');
 }
 
-document.addEventListener('keydown', offModalForEscape);
-
-function toggleModal() {
-  modal.classList.toggle('is-hidden');
-}
 function offModalForEscape(e) {
   if (e.key === 'Escape') {
     modal.classList.add('is-hidden');
   }
 }
+
+document.addEventListener('keydown', offModalForEscape);
+
+function offModalClick(event) {
+  if (event.target !== modalWindow) {
+    modal.classList.add("is-hidden");
+  }
+}
+window.addEventListener("click", offModalClick);
 
 const posters = document.querySelector('.cards-wrapper');
 posters.addEventListener('click', selectFilm);
@@ -85,9 +90,6 @@ function selectFilm(event) {
 
 // modalHandler();
 
-//openModal.addEventListener('click', toggleModal);
-closeModal.addEventListener('click', toggleModal);
-
 // Fetch movie info
 const titleEl = document.querySelector('h2.modal__title');
 const voteRatingEl = document.getElementById('queryVoteRating');
@@ -97,7 +99,6 @@ const originalTitleEl = document.getElementById('queryOriginalTitle');
 const genreEl = document.getElementById('queryGenre');
 const posterEl = document.querySelector('.modal__poster');
 const overviewEl = document.querySelector('.modal__summary-text');
-const cardEl = document.querySelector('.card');
 
 // Fetch trending
 const inputEl = document.querySelector('.header-search-bar__input');
@@ -116,8 +117,6 @@ const fetchMovies = async () => {
 
 async function getMovieById(filmId) {
   const response = await fetch(`${findMovieApi_URL}/${filmId}?api_key=${API_key}`);
-
-  console.log('response', response);
   return response.json();
 }
 
@@ -137,11 +136,8 @@ function getMovieData(filmId) {
       poster_path: movieData.poster_path,
     };
 
-    console.log('movie', movie);
+    console.log(movie);
 
-    //const modalShow = movie => {
-    //cardEl.addEventListener('click', () => {
-    //cardEl.forEach(movie => {
     let modal = document.querySelector('.modal');
     const closeModal = document.querySelector('[data-modal-close]');
     const posterEl = document.querySelector('.modal__poster');
@@ -152,22 +148,21 @@ function getMovieData(filmId) {
     const originalTitleEl = document.getElementById('queryOriginalTitle');
     // const genreEl = getElementById("queryGenre");
     const overviewEl = document.querySelector('.modal__summary-text');
+    const dataId = document.querySelector(".id");
 
     modal.classList.remove('is-hidden');
-    posterEl.src = `https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`;
+    posterEl.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     titleEl.innerHTML = `${movie.title}`;
     console.log(`${movie.title}`);
     voteRatingEl.innerHTML = `${movie.vote_average}`;
-    //oteCountEl.innerHTML = `${movie.vote_count}`;
+    //voteCountEl.innerHTML = `${movie.vote_count}`;
     popularityEl.innerHTML = `${movie.popularity}`;
     originalTitleEl.innerHTML = `${movie.originalTitle}`;
     overviewEl.innerHTML = `${movie.overview}`;
+    dataId.innerHTML = `${movie.id}`;
 
     closeModal.addEventListener('click', () => {
       modal.classList.add('is-hidden');
     });
-    //});
-    //});
-    //};
   });
 }
