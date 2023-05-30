@@ -1,6 +1,6 @@
 import { genreList, getGenres } from './fetch-genres';
-
 import axios from 'axios';
+import { spinner, removeSpinner } from './spinner';
 
 const inputEl = document.querySelector('.header-search-bar__input');
 const searchButtonEl = document.querySelector('.header-search-bar__button');
@@ -15,6 +15,7 @@ let page = 1;
 warningEl.style.visibility = 'hidden';
 
 const getMoviesSearch = async () => {
+  spinner();
   try {
     const searchMovieAPI_URL = 'https://api.themoviedb.org/3/search/movie';
     const result = await axios.get(
@@ -25,10 +26,12 @@ const getMoviesSearch = async () => {
     const movies = result.data.results;
     // console.log('movies', movies);
     await getGenres();
-
+    removeSpinner();
     return movies;
   } catch (error) {
     console.error(error);
+  } finally {
+    spinner();
   }
 };
 

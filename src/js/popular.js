@@ -1,5 +1,6 @@
 import { genreList, getGenres } from './fetch-genres';
 import axios from 'axios';
+import { spinner, removeSpinner } from './spinner';
 
 const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
 const galleryEl = document.querySelector('.cards-wrapper');
@@ -8,6 +9,7 @@ const loadMoreTrendingButtonEl = document.querySelector('.load-more-trending');
 let page = 1;
 
 const getTrending = async () => {
+  spinner();
   try {
     const searchTrendingAPI_URL = 'https://api.themoviedb.org/3/trending/movie/day';
     const result = await axios.get(
@@ -15,13 +17,15 @@ const getTrending = async () => {
     );
 
     const movies = result.data.results;
-    console.log('movies', movies);
+    // console.log('movies', movies);
     const loadMoreInputButtonEl = (document.querySelector('.load-more').hidden = true);
     await getGenres();
-
+    removeSpinner();
     return movies;
   } catch (error) {
     console.error(error);
+  } finally {
+    spinner();
   }
 };
 

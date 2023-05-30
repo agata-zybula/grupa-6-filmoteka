@@ -10,5 +10,5 @@ export function spinner() {
 }
 
 export function removeSpinner() {
-  Loading.remove(400);
+  Loading.remove(500);
 }
