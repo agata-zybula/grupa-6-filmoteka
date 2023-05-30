@@ -1,4 +1,4 @@
-const galleryEl = document.querySelector(".cards-wrapper");
+const galleryEl = document.querySelector(".library-wrapper");
 
 function clearGallery() {
   galleryEl.innerHTML = "";
