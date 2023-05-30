@@ -1,7 +1,7 @@
 import { createMovieCard } from './create-movie-card';
 import { localStorageHandler } from './add-to-local-storage';
-import { renderWatchedMovies } from './get-local-storage'; 
-import { genreList, getGenres } from "./fetch-genres";
+import { renderWatchedMovies } from './get-local-storage';
+import { genreList, getGenres } from './fetch-genres';
 
 // Open or close modal
 const openModal = document.querySelector('[data-modal-open]');
@@ -9,7 +9,7 @@ const openModalOnCard = document.querySelector('.card');
 const modalWindow = document.querySelector('.modal__window');
 const closeModal = document.querySelector('[data-modal-close]');
 const modal = document.querySelector('[data-modal]');
-const cardEl = document.querySelectorAll(".card");
+const cardEl = document.querySelectorAll('.card');
 
 function toggleModal() {
   modal.classList.toggle('is-hidden');
@@ -25,10 +25,10 @@ document.addEventListener('keydown', offModalForEscape);
 
 function offModalClick(event) {
   if (event.target !== modalWindow) {
-    modal.classList.add("is-hidden");
+    modal.classList.add('is-hidden');
   }
 }
-window.addEventListener("click", offModalClick);
+window.addEventListener('click', offModalClick);
 
 const posters = document.querySelector('.cards-wrapper');
 posters.addEventListener('click', selectFilm);
@@ -37,7 +37,10 @@ function selectFilm(event) {
   let filmId = event.target.dataset.id;
 
   getMovieData(filmId);
-  toggleModal();
+
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
 }
 
 // function showModal(data) {
@@ -138,7 +141,7 @@ function getMovieData(filmId) {
     };
 
     console.log(movie);
-    console.log(movie.id)
+    console.log(movie.id);
 
     let modal = document.querySelector('.modal');
     const closeModal = document.querySelector('[data-modal-close]');
@@ -150,7 +153,7 @@ function getMovieData(filmId) {
     const originalTitleEl = document.getElementById('queryOriginalTitle');
     // const genreEl = getElementById("queryGenre");
     const overviewEl = document.querySelector('.modal__summary-text');
-    const dataId = document.querySelector(".id");
+    const dataId = document.querySelector('.id');
 
     modal.classList.remove('is-hidden');
     posterEl.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
