@@ -64,6 +64,7 @@ export function localStorageHandler() {
             existingEntries.push(movieId);
             
             localStorage.setItem(STORAGE_QUEUED, JSON.stringify(existingEntries));
+            const watchedArray = localStorage.getItem(STORAGE_WATCHED);
         } else {
             console.log(movieId + " already exists")
         }

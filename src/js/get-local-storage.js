@@ -1,105 +1,99 @@
-import { genreList, getGenres } from "./fetch-genres";
+// import { genreList, getGenres } from "./fetch-genres";
 
-const API_key = "dbea77d3eb5b3622b027f73f6a5032fe";
-const findMovieApi_URL = "https://api.themoviedb.org/3/movie/";
+// const API_key = "dbea77d3eb5b3622b027f73f6a5032fe";
+// const findMovieApi_URL = "https://api.themoviedb.org/3/movie/";
 
-async function getMovieById(filmId) {
-  const response = await fetch(`${findMovieApi_URL}/${filmId}?api_key=${API_key}`);
-  return response.json();
-}
+// const movieEl = document.querySelector(".id");
+// const movieId = movieEl.innerHTML
 
-getMovieById();
+// // async function getMovieById(movieId) {
+// //   const response = await fetch(`${findMovieApi_URL}/${movieId}?api_key=${API_key}`);
+// //   return response.json();
+// // }
 
-async function getMovieData(filmId) {
-  getMovieById(filmId).then(movies => {
-    const movieData = movies;
+// // getMovieById(movieId);
 
-    const movie = {
-      title: movieData.title,
-      vote_average: movieData.vote_average,
-      vote_count: movieData.vote_count,
-      popularity: movieData.popularity,
-      originalTitle: movieData.original_title,
-      // genre: movies.genre_ids,
-      overview: movieData.overview,
-      poster_path: movieData.poster_path,
-    };
-    console.log(movie);
-  });
-}
+// // async function getMovieData(movieId) {
+// //   getMovieById(movieId).then(movies => {
+// //     const movieData = movies;
 
-  const galleryEl = document.querySelector(".cards-wrapper");
+// //     const movie = {
+// //       title: movieData.title,
+// //       vote_average: movieData.vote_average,
+// //       vote_count: movieData.vote_count,
+// //       popularity: movieData.popularity,
+// //       originalTitle: movieData.original_title,
+// //       // genre: movies.genre_ids,
+// //       overview: movieData.overview,
+// //       poster_path: movieData.poster_path,
+// //     };
+// //     console.log(movie);
+// //   });
+// // }
 
-function clearGallery() {
-  galleryEl.innerHTML = "";
-};
+// const galleryEl = document.querySelector(".cards-wrapper");
 
-export async function renderWatchedMovies(STORAGE_WATCHED) {
+// function clearGallery() {
+//   galleryEl.innerHTML = "";
+// };
 
-  async function getId() {
+// export async function renderWatchedMovies() {
 
-    const moviesArray = [];
-    const getIdIntoArray = await fetch(`${findMovieApi_URL}/${filmId}?api_key=${API_key}`)
-      .then(response => response.json())
-    moviesArray.push(Object.values(getIdIntoArray))
-  }
+//   async function getId() {
 
-  async function iterateThroughArray() {
+//     const moviesArray = [];
+//     const getIdIntoArray = await getMovieById(`${findMovieApi_URL}/${movieId}?api_key=${API_key}`)
+//       .then(response => response.json())
+//     moviesArray.push(Object.values(getIdIntoArray))
+//   }
 
-    const watchedArray = JSON.parse(localStorage.getItem(STORAGE_WATCHED));
+//   async function iterateThroughArray() {
 
-    for (let i = 0; i <= watchedArray.length; i++) {
-      if (watchedArray[i] !== moviesArray[i] || watchedArray.length === null) {
-        const noMovies = document.createElement("div");
-        noMovies.innerHTML = `<p>There's nothing here.</p>`;
-        galleryEl.appendChild(noMovies);
-      } else {
-        galleryEl.innerHTML = "aaa"
-      };
-      createMovieCardSearch(watchedArray);
-    }
-  }
-  iterateThroughArray();
-}
+//     let watchedArray = localStorage.getItem(STORAGE_WATCHED);
 
-// const headerWatchedButton = document.getElementById("watchedButton");
-//   headerWatchedButton.addEventListener("click", () => {
-//     clearGallery();
-//     console.log(STORAGE_WATCHED)
-//     renderWatchedMovies()
-//   });
-
-// renderWatchedMovies()
-
-// headerWatchedButton.addEventListener("click", () => {
-//   clearGallery();
-//   if (!headerWatchedButton.classList.contains("watched__button--active")) {
-//     headerWatchedButton.classList.add("watched__button--active");
-//     headerQueuedButton.classList.remove("watched__button--active");
+//     for (let i = 0; i <= watchedArray.length; i++) {
+//       if (watchedArray[i] != moviesArray[i] || watchedArray == null) {
+//         const noMovies = document.createElement("div");
+//         noMovies.innerHTML = `<p>There's nothing here.</p>`;
+//         galleryEl.appendChild(noMovies);
+//       } else {
+//         galleryEl.innerHTML = "aaa"
+//       };
 //     }
-// });
+//   }
+//   iterateThroughArray();
+// }
 
-// const headerQueuedButton = document.getElementById("queuedButton");
+// renderWatchedMovies();
 
-// headerQueuedButton.addEventListener("click", () => {
-//   clearGallery();
-//   if (!headerQueuedButton.classList.contains("watched__button--active")) {
-//     headerQueuedButton.classList.add("watched__button--active");
-//     headerWatchedButton.classList.remove("watched__button--active");
-//     }
-// });
+// // const headerWatchedButton = document.getElementById("watchedButton");
+// // const headerQueuedButton = document.getElementById("queuedButton");
 
+// // headerWatchedButton.addEventListener("click", () => {
+// //   console.log("bbb")
+// //   if (!headerWatchedButton.classList.contains("watched__button--link")) {
+// //     headerWatchedButton.classList.add("watched__button--link");
+// //     headerQueuedButton.classList.remove("watched__button--link");
+// //   }
+// // });
 
+// // function buttonQueued() {
+// //   clearGallery();
+// //   if (!headerQueuedButton.classList.contains("watched__button--link")) {
+// //     headerQueuedButton.classList.add("watched__button--link");
+// //     headerWatchedButton.classList.remove("watched__button--link");
+// //   }
+// // }
 
-// `
-//       <div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w500${
-//         movie.poster_path}' alt=Poster of ${movie.title} movie data-id="${movie.id}"></a>
-//         <div class="card__info">
-//           <div class="card__quick-info">
-//             <div class="card__movie-title">${movie.title}</div>
-//             <div class="card__movie-genre"></div>
-//             <div class="card__movie-release">${movie.release_date.slice(0, 4)}</div>
-//           </div>
-//           <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
-//         </div>
-//       </div>`
+// // `
+// //       <div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w500${
+// //         movie.poster_path}' alt=Poster of ${movie.title} movie data-id="${movie.id}"></a>
+// //         <div class="card__info">
+// //           <div class="card__quick-info">
+// //             <div class="card__movie-title">${movie.title}</div>
+// //             <div class="card__movie-genre"></div>
+// //             <div class="card__movie-release">${movie.release_date.slice(0, 4)}</div>
+// //           </div>
+// //           <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
+// //         </div>
+// //       </div>`

@@ -45,57 +45,6 @@ function selectFilm(event) {
   getMovieData(filmId);
 }
 
-// function showModal(data) {
-//   const markup = renderModalMarkup(data);
-//   modal.insertAdjacentHTML("beforeend", markup);
-// };
-
-// function modalHandler() {
-
-//   function renderModal() {
-//     openModalOnCard.forEach(function(event) {
-//       event.addEventListener("click", () => {
-//         modal.classList.remove("is-hidden")
-
-//       })
-//       document.addEventListener("keydown", closeOnESC);
-//       document.addEventListener("click", closeOnBackdrop);
-//       document.addEventListener("click", closeOnButton);
-//     })
-//     // modal.classList.remove("is-hidden");
-//     // document.addEventListener("keydown", closeOnESC);
-//     // document.addEventListener("click", closeOnBackdrop);
-//     // document.addEventListener("click", closeOnButton);
-//   }
-
-//   function closeModal() {
-//     modal.classList.add("is-hidden");
-//     document.removeEventListener("keyup", closeOnESC);
-//     document.removeEventListener("click", closeOnBackdrop);
-//     document.removeEventListener("click", closeOnButton);
-//   }
-
-//   function closeOnESC(event) {
-//     if (event.key === "Escape") {
-//       closeModal();
-//     }
-//   }
-
-//   function closeOnBackdrop(event) {
-//     if (event.target !== modal) {
-//       closeModal();
-//     }
-//   }
-
-//   function closeOnButton(event) {
-//     if (event.target === closeModal) {
-//       closeModal();
-//     }
-//   }
-// };
-
-// modalHandler();
-
 // Fetch movie info
 const titleEl = document.querySelector('h2.modal__title');
 const voteRatingEl = document.getElementById('queryVoteRating');
