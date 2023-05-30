@@ -23,6 +23,7 @@
 
 .card {
   padding-bottom: 20px;
+  cursor: pointer;
   @include tablet {
     padding: 0px;
   }
