@@ -31,16 +31,18 @@ function offModalClick(event) {
 window.addEventListener('click', offModalClick);
 
 const posters = document.querySelector('.cards-wrapper');
-posters.addEventListener('click', selectFilm);
-
-function selectFilm(event) {
-  let filmId = event.target.dataset.id;
-
-  getMovieData(filmId);
-
+posters.addEventListener('click', event => {
   if (event.target.nodeName !== 'IMG') {
     return;
+  } else {
+    event.stopPropagation();
+    selectFilm(event);
+    toggleModal();
   }
+});
+function selectFilm(event) {
+  let filmId = event.target.dataset.id;
+  getMovieData(filmId);
 }
 
 // function showModal(data) {
