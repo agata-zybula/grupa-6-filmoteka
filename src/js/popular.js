@@ -36,12 +36,18 @@ const createMovieCard = movies => {
         .slice(0, 3)
         .map(genreId => genreList[genreId])
         .join(', ');
+
+      let title = movie.title;
+      if (title.length > 50) {
+        title = title.slice(0, 50) + '...';
+      }
+
       return `<div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w500${
         movie.poster_path
       }' alt='Poster of ${movie.title} movie' data-id="${movie.id}"></a>
     <div class="card__info">
       <div class="card__quick-info">
-        <div class="card__movie-title">${movie.title}</div>
+        <div class="card__movie-title">${title}</div>
         <div class="card__movie-genre">${genreNames}</div>
         <div class="card__movie-release">${movie.release_date.slice(0, 4)}</div>
       </div>
