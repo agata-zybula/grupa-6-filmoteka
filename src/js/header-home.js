@@ -22,9 +22,9 @@ const getMoviesSearch = async () => {
       `${searchMovieAPI_URL}?api_key=${API_key}&query=${inputEl.value}&page=${page}&language=en-US`,
     );
 
-    // console.log('response getMovies', result);
+    console.log('response getMovies', result);
     const movies = result.data.results;
-    // console.log('movies', movies);
+    console.log('movies', movies);
     await getGenres();
     removeSpinner();
     return movies;

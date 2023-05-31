@@ -1,4 +1,3 @@
-import { createMovieCard } from './create-movie-card';
 import { localStorageHandler } from './add-to-local-storage';
 import { renderWatchedMovies } from './get-local-storage';
 import { genreList, getGenres } from './fetch-genres';
