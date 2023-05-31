@@ -1,11 +1,20 @@
 import { genreList, getGenres } from './fetch-genres';
+import axios from 'axios';
 
 const findMovieApi_URL = 'https://api.themoviedb.org/3/movie/';
 const API_key = 'dbea77d3eb5b3622b027f73f6a5032fe';
 
 async function getMovieById(filmId) {
-  const response = await fetch(`${findMovieApi_URL}/${filmId}?api_key=${API_key}`);
-  return response.json();
+  try {
+    const response = await axios.get(`${findMovieApi_URL}${filmId}?api_key=${API_key}`);
+    const movies = response.data;
+
+    console.log(`movies`, movies);
+    await getGenres();
+    return movies;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function localStorageHandler() {
@@ -63,18 +72,30 @@ const STORAGE_QUEUED = 'queued-movies';
 const createMovieCard = movies => {
   return movies
     .map(movie => {
-      return `<div class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w220_and_h330_face${
+      const genreNames = movie.genres;
+      console
+        .log(genreNames)
+        ?.slice(0, 3)
+        .map(genreId => genreList[genreId])
+        .join(', ');
+
+      let title = movie.title;
+      if (title.length > 50) {
+        title = title.slice(0, 50) + '...';
+      }
+
+      return `<div id="card" class="card"><img class="card__poster" src='https://image.tmdb.org/t/p/w500${
         movie.poster_path
-      }' alt=Poster of ${movie.title} movie data-id="${movie.id}">
-        <div class="card__info">
-          <div class="card__quick-info">
-            <div class="card__movie-title">${movie.title}</div>
-            <div class="card__movie-genre">${movie.genre}</div>
-            <div class="card__movie-release">${movie.release_date}</div>
-          </div>
-          <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
-        </div>
-      </div>`;
+      }' alt='Poster of ${movie.title} movie' data-id="${movie.id}"></a>
+    <div class="card__info">
+      <div class="card__quick-info">
+        <div class="card__movie-title">${title}</div>
+        <div class="card__movie-genre">${genreNames}</div>
+        <div class="card__movie-release">${movie.release_date?.slice(0, 4)}</div>
+      </div>
+      <div class="card__movie-rating">${Math.round(movie.vote_average * 10) / 10}</div>
+    </div>
+  </div>`;
     })
     .join('');
 };
