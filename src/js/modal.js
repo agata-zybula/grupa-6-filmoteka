@@ -109,7 +109,7 @@ function getMovieData(filmId) {
     titleEl.innerHTML = `${movie.title}`;
     console.log(`${movie.title}`);
     voteRatingEl.innerHTML = `${movie.vote_average}`;
-    //voteCountEl.innerHTML = `${movie.vote_count}`;
+    voteCountEl.innerHTML = `${movie.vote_count}`;
     popularityEl.innerHTML = `${movie.popularity}`;
     originalTitleEl.innerHTML = `${movie.originalTitle}`;
     overviewEl.innerHTML = `${movie.overview}`;
