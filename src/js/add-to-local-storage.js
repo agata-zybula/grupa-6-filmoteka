@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { genreList, getGenres } from './fetch-genres';
 import axios from 'axios';
 
@@ -17,7 +18,7 @@ async function getMovieById(filmId) {
   }
 }
 
-export function localStorageHandler() {
+function localStorageHandler() {
   const addToWatchedButton = document.getElementById('addToWatched');
   const addToQueueButton = document.getElementById('addToQueue');
 
@@ -34,8 +35,10 @@ export function localStorageHandler() {
       existingEntries.push(movieId);
 
       localStorage.setItem(STORAGE_WATCHED, JSON.stringify(existingEntries));
+      Notiflix.Notify.success('Added to the "Watched" list :)')
     } else {
-      console.log(movieId + ' already exists');
+      // console.log(movieId + ' already exists');
+      Notiflix.Notify.failure("That movie's already on the list!")
     }
   }
 
@@ -49,8 +52,10 @@ export function localStorageHandler() {
       existingEntries.push(movieId);
 
       localStorage.setItem(STORAGE_QUEUED, JSON.stringify(existingEntries));
+      Notiflix.Notify.success('Added to the "Queue" list :)')
     } else {
-      console.log(movieId + ' already exists');
+      // console.log(movieId + ' already exists');
+      Notiflix.Notify.failure("That movie's already on the list!")
     }
   }
 
@@ -73,8 +78,7 @@ const createMovieCard = movies => {
   return movies
     .map(movie => {
       const genreNames = movie.genres;
-      console
-        .log(genreNames)
+      console.log(genreNames)
         ?.slice(0, 3)
         .map(genreId => genreList[genreId])
         .join(', ');
@@ -108,9 +112,8 @@ async function renderWatchedMovies() {
   const watchedArray = JSON.parse(localStorage.getItem(STORAGE_WATCHED) || '[]');
 
   if (watchedArray.length === 0) {
-    const noMovies = document.createElement('div');
-    noMovies.innerHTML = `<p>There's nothing here.</p>`;
-    galleryEl.appendChild(noMovies);
+    // const noMovies = document.createElement('div');
+    galleryEl.innerHTML = `<p>There's nothing here.</p>`;
     return;
   }
 
@@ -140,9 +143,8 @@ async function renderQueuedMovies() {
   const queuedArray = JSON.parse(localStorage.getItem(STORAGE_QUEUED) || '[]');
 
   if (queuedArray.length === 0) {
-    const noMovies = document.createElement('div');
-    noMovies.innerHTML = `<p>There's nothing here.</p>`;
-    galleryEl.appendChild(noMovies);
+    // const noMovies = document.createElement('div');
+    galleryEl.innerHTML = `<p>There's nothing here.</p>`;
     return;
   }
 
@@ -160,6 +162,7 @@ async function renderQueuedMovies() {
       overview: movieData.overview,
       poster_path: movieData.poster_path,
       release_date: movieData.release_date,
+      genres: movieData.genres.name
     };
 
     console.log(movie);
