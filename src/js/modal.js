@@ -1,5 +1,4 @@
-import { localStorageHandler } from './add-to-local-storage';
-import { renderWatchedMovies } from './get-local-storage';
+import './add-to-local-storage';
 import { genreList, getGenres } from './fetch-genres';
 
 // Open or close modal
