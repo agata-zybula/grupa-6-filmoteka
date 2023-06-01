@@ -131,6 +131,7 @@ async function renderWatchedMovies() {
       overview: movieData.overview,
       poster_path: movieData.poster_path,
       release_date: movieData.release_date,
+      genres: movieData.genres.map(genre => genre.name).slice(0, 3).join(", ")
     };
 
     // Render the movie card using the movie object
@@ -162,7 +163,7 @@ async function renderQueuedMovies() {
       overview: movieData.overview,
       poster_path: movieData.poster_path,
       release_date: movieData.release_date,
-      genres: movieData.genres.name
+      genres: movieData.genres.map(genre => genre.name).slice(0, 3).join(", ")
     };
 
     console.log(movie);
