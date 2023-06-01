@@ -1,5 +1,6 @@
 import './add-to-local-storage';
 import { genreList, getGenres } from './fetch-genres';
+import axios from 'axios';
 
 // Open or close modal
 const openModal = document.querySelector('[data-modal-open]');
@@ -69,11 +70,19 @@ const fetchMovies = async () => {
 };
 
 async function getMovieById(filmId) {
-  const response = await fetch(`${findMovieApi_URL}/${filmId}?api_key=${API_key}`);
-  return response.json();
+  try {
+    const response = await axios.get(`${findMovieApi_URL}${filmId}?api_key=${API_key}`);
+    const movies = response.data;
+
+    console.log(`movies`, movies);
+    await getGenres();
+    return movies;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-function getMovieData(filmId) {
+async function getMovieData(filmId) {
   getMovieById(filmId).then(movies => {
     const movieData = movies;
 
@@ -83,7 +92,7 @@ function getMovieData(filmId) {
       vote_count: movieData.vote_count,
       popularity: movieData.popularity,
       originalTitle: movieData.original_title,
-      // genres: movieData.genres.map(genre => genre.name).slice(0, 3).join(", "),
+      genres: movieData.genres.map(genre => genre.name).slice(0, 3).join(", "),
       id: movieData.id,
       overview: movieData.overview,
       poster_path: movieData.poster_path,
@@ -100,7 +109,7 @@ function getMovieData(filmId) {
     const voteCountEl = document.getElementById('queryVoteCount');
     const popularityEl = document.getElementById('queryPopularity');
     const originalTitleEl = document.getElementById('queryOriginalTitle');
-    // const genreEl = getElementById("queryGenre");
+    const genreEl = document.getElementById("queryGenre");
     const overviewEl = document.querySelector('.modal__summary-text');
     const dataId = document.querySelector('.id');
 
@@ -108,11 +117,11 @@ function getMovieData(filmId) {
     posterEl.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     titleEl.innerHTML = `${movie.title}`;
     console.log(`${movie.title}`);
-    voteRatingEl.innerHTML = `${movie.vote_average}`;
+    voteRatingEl.innerHTML = `${movie.vote_average.toFixed(1)}`;
     voteCountEl.innerHTML = `${movie.vote_count}`;
     popularityEl.innerHTML = `${movie.popularity}`;
     originalTitleEl.innerHTML = `${movie.originalTitle}`;
-    // genreEl.innerHTML = `${movie.genres}`;
+    genreEl.innerHTML = `${movie.genres}`;
     overviewEl.innerHTML = `${movie.overview}`;
     dataId.innerHTML = `${movie.id}`;
 
