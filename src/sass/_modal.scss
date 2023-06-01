@@ -24,7 +24,7 @@ button {
   background-color: $backdrop;
   z-index: 1;
   transition: $transitionKit;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 
   &__window {
     position: relative;
@@ -49,6 +49,7 @@ button {
       height: 552px;
       padding: 40px 72px 40px 36px;
       gap: 68px;
+      overflow-y: hidden;
     }
 
     @media screen and (min-width: 1280px) {
@@ -56,6 +57,7 @@ button {
       height: 558px;
       padding: 40px 12px;
       gap: 16px;
+      overflow-y: hidden;
     }
   }
 

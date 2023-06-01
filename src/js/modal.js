@@ -1,5 +1,4 @@
-import { localStorageHandler } from './add-to-local-storage';
-import { renderWatchedMovies } from './get-local-storage';
+import './add-to-local-storage';
 import { genreList, getGenres } from './fetch-genres';
 
 // Open or close modal
@@ -84,7 +83,7 @@ function getMovieData(filmId) {
       vote_count: movieData.vote_count,
       popularity: movieData.popularity,
       originalTitle: movieData.original_title,
-      // genre: movies.genre_ids,
+      // genres: movieData.genres.map(genre => genre.name).slice(0, 3).join(", "),
       id: movieData.id,
       overview: movieData.overview,
       poster_path: movieData.poster_path,
@@ -110,9 +109,10 @@ function getMovieData(filmId) {
     titleEl.innerHTML = `${movie.title}`;
     console.log(`${movie.title}`);
     voteRatingEl.innerHTML = `${movie.vote_average}`;
-    //voteCountEl.innerHTML = `${movie.vote_count}`;
+    voteCountEl.innerHTML = `${movie.vote_count}`;
     popularityEl.innerHTML = `${movie.popularity}`;
     originalTitleEl.innerHTML = `${movie.originalTitle}`;
+    // genreEl.innerHTML = `${movie.genres}`;
     overviewEl.innerHTML = `${movie.overview}`;
     dataId.innerHTML = `${movie.id}`;
 
